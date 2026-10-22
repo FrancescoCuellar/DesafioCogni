@@ -32,3 +32,51 @@ def calcular_urgencia(recurso, personas):
             return "Medio"
         else:
             return "Bajo"
+
+def leer_solicitudes():
+    print("\nLista de Solicitudes")
+    archivo = open("solicitudes.txt", "r", encoding="utf-8")
+    lineas = archivo.readlines()
+    archivo.close()
+    if not lineas:
+        print("No hay registros guardados en el archivo.")
+        return
+    for linea in lineas:
+        print(linea.strip())
+
+def buscar_solicitud():
+    print("\nBúsqueda Secuencial")
+    codigo_buscado = input("Ingrese el código a buscar (Ej: SOL-001): ").strip()
+    encontrado = False
+    for s in lista_solicitudes:
+        if s[0].lower() == codigo_buscado.lower():
+            print(f"\nSolicitud encontrada")
+            print(f"Código   : {s[0]}")
+            print(f"Nombre   : {s[1]}")
+            print(f"DNI      : {s[2]}")
+            print(f"Distrito : {s[3]}")
+            print(f"Recurso  : {s[4]}")
+            print(f"Personas : {s[5]}")
+            print(f"Urgencia : {s[6]}")
+            encontrado = True
+            break
+    if not encontrado:
+        print("\nSolicitud no encontrada.")
+
+def listar_ordenadas():
+    print("\nListado Priorizado")
+    if not lista_solicitudes:
+        print("No hay registros para ordenar.")
+        return
+    copia_lista = []
+    for s in lista_solicitudes:
+        copia_lista.append(list(s))
+    for i in range(1, len(copia_lista)):
+        actual = copia_lista[i]
+        j = i - 1
+        while j >= 0 and int(copia_lista[j][5]) < int(actual[5]):
+            copia_lista[j + 1] = copia_lista[j]
+            j -= 1
+        copia_lista[j + 1] = actual
+    for s in copia_lista:
+        print(f"Código: {s[0]} | Nombre: {s[1]} | Recurso: {s[4]} | Personas: {s[5]} | Urgencia: {s[6]}")
