@@ -59,7 +59,6 @@ def registrar_solicitud():
     lista_solicitudes.append([codigo, nombre, dni, distrito, recurso, str(personas), urgencia])
     print(f"\nSolicitud registrada correctamente. Código asignado: {codigo}")
 
-
 def leer_solicitudes():
     print("\nLista de Solicitudes")
     archivo = open("solicitudes.txt", "r", encoding="utf-8")
@@ -72,7 +71,6 @@ def leer_solicitudes():
 
     for linea in lineas:
         print(linea.strip())
-
 
 def buscar_solicitud():
     print("\nBúsqueda Secuencial")
@@ -93,7 +91,6 @@ def buscar_solicitud():
             break
     if not encontrado:
         print("\nSolicitud no encontrada.")
-
 
 def listar_ordenadas():
     print("\nListado Priorizado")
@@ -116,8 +113,8 @@ def listar_ordenadas():
     for s in copia_lista:
         print(f"Código: {s[0]} | Nombre: {s[1]} | Recurso: {s[4]} | Personas afectadas: {s[5]} | Urgencia: {s[6]}")
 
-
 def menu():
+    cargar_solicitudes()
     while True:
         print("\nGestion de solicitudes")
         print("1. Registrar solicitud")
